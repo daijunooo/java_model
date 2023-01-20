@@ -13,3 +13,55 @@
 - 转变了开发者的角色，从一个流水线工人转变为一个指挥者
 - 排查问题更容易，一个个模型就像一个个车间，哪里出问题很容易找到
 - 代码的组织更有逻辑性，每个模型只干每个模型的事
+
+# 建表语句
+
+- 数据库 mysql5.7
+
+```
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for category
+-- ----------------------------
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(128) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Records of category
+-- ----------------------------
+BEGIN;
+INSERT INTO `category` VALUES (1, '分类1');
+INSERT INTO `category` VALUES (2, '分类2');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for goods
+-- ----------------------------
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+  `id` bigint(20) NOT NULL,
+  `category` int(11) DEFAULT NULL,
+  `goods_name` varchar(128) COLLATE utf8mb4_bin NOT NULL,
+  `goods_images` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `goods_price` int(11) NOT NULL,
+  `is_up` int(11) NOT NULL,
+  `create_time` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Records of goods
+-- ----------------------------
+BEGIN;
+INSERT INTO `goods` VALUES (1, 1, '苹果手机', '/56432453.png', 5899, 0, '2023-01-19 10:25:11.516497');
+INSERT INTO `goods` VALUES (2, 2, '测试数据', '/3543432HJG.png', 223, 1, '2023-01-20 10:55:53.915392');
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;
+```
