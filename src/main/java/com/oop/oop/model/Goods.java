@@ -1,17 +1,22 @@
 package com.oop.oop.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.oop.oop.entity.GoodsEntity;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author tommy dai
  * @date 2023/1/20
- *
+ * <p>
  * 所有方法用 $ 前缀是为了避免与 Entity 里面的方法产生冲突
  */
 public class Goods extends GoodsEntity {
+
+    @TableField(exist = false)
+    private Category $category;
 
     /**
      * 商品上架
@@ -47,7 +52,17 @@ public class Goods extends GoodsEntity {
      * 获取商品分类
      */
     public Category $getCategory() {
-        return new Category().$repo().selectById(getId());
+        return $getCategory(false);
+    }
+
+    /**
+     * 获取商品分类
+     */
+    public Category $getCategory(boolean refresh) {
+        if (Objects.isNull($category) || refresh) {
+            $category = new Category().$repo().selectById(getId());
+        }
+        return $category;
     }
 
     /**
