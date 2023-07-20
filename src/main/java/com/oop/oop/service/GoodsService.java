@@ -1,19 +1,22 @@
 package com.oop.oop.service;
 
-import com.oop.oop.model.Category;
-import com.oop.oop.model.Goods;
+import com.oop.oop.repository.GoodsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author tommy dai
  * @date 2023/1/20
  */
-public interface GoodsService {
+@Service
+public class GoodsService {
 
-    Goods getOne(Long id);
+    @Autowired
+    private GoodsRepository goodsRepository;
 
-    int up(Long id);
 
-    Category getCategory(Long id);
+    public GoodsRepository repository() {
+        return goodsRepository;
+    }
 
-    void test(Long id);
 }
