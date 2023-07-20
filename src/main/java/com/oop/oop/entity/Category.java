@@ -1,6 +1,7 @@
 package com.oop.oop.entity;
 
 import com.oop.oop.ioc.Ioc;
+import com.oop.oop.service.CategoryService;
 import com.oop.oop.service.GoodsService;
 import lombok.Data;
 
@@ -24,6 +25,15 @@ public class Category {
 
     public List<Goods> $goods() {
         return Ioc.getBean(GoodsService.class).getByCategoryId(id);
+    }
+
+    public Category reName(String name) {
+        this.name = name;
+        return this.save();
+    }
+
+    public Category save() {
+        return Ioc.getBean(CategoryService.class).repository().save(this);
     }
 
 }
