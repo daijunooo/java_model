@@ -1,8 +1,11 @@
 package com.oop.oop.entity;
 
+import com.oop.oop.ioc.Ioc;
+import com.oop.oop.service.GoodsService;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author tommy dai
@@ -18,5 +21,9 @@ public class Category {
 
     @Column(columnDefinition = "varchar(64) CHARACTER SET utf8mb4 default ''", nullable = false)
     private String name;
+
+    public List<Goods> $goods() {
+        return Ioc.getBean(GoodsService.class).getByCategoryId(id);
+    }
 
 }

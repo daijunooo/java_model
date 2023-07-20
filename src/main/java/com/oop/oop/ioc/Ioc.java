@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanIoc implements ApplicationContextAware {
+public class Ioc implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 

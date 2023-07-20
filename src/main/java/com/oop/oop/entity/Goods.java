@@ -1,6 +1,6 @@
 package com.oop.oop.entity;
 
-import com.oop.oop.ioc.BeanIoc;
+import com.oop.oop.ioc.Ioc;
 import com.oop.oop.service.CategoryService;
 import lombok.Data;
 
@@ -38,12 +38,8 @@ public class Goods {
     private Long categoryId;
 
 
-    private CategoryService getCategoryService() {
-        return BeanIoc.getBean(CategoryService.class);
-    }
-
-    public Category getCategory() {
-        return getCategoryService().repository().findById(categoryId).orElseGet(Category::new);
+    public Category $category() {
+        return Ioc.getBean(CategoryService.class).repository().findById(categoryId).orElseGet(Category::new);
     }
 
 }

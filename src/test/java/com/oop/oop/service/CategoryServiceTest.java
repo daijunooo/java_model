@@ -1,6 +1,7 @@
 package com.oop.oop.service;
 
 import com.oop.oop.OopApplication;
+import com.oop.oop.entity.Category;
 import com.oop.oop.entity.Goods;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,11 @@ class CategoryServiceTest {
 
     @Test
     void repository() {
-        Goods all = goodsService.repository().findById(1L).orElseGet(Goods::new);
-        System.err.println(all.getCategory());
+        Goods goods = goodsService.getById(1L);
+
+        // 获取关系数据
+        Category category = goods.$category();
+
+        System.err.println(category);
     }
 }
