@@ -1,11 +1,14 @@
 package com.oop.oop.controller;
 
+import com.oop.oop.entity.GoodsEntity;
 import com.oop.oop.model.Category;
 import com.oop.oop.model.Goods;
 import com.oop.oop.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author tommy dai
@@ -19,34 +22,21 @@ public class ApiController {
 
     @GetMapping("/test")
     public void test() {
-        goodsService.test(1L);
-    }
+        Goods one = goodsService.lambdaQuery()
+                .eq(GoodsEntity::getId, 2).one();
 
-    @GetMapping("/getOne")
-    public Goods getOne() {
-        Goods goods = goodsService.getOne(1L);
-        System.err.println(goods);
-        return goods;
-    }
+        one.setGoodsName("测试商品");
+        one.saveOrUpdate();
 
-    @GetMapping("/up")
-    public int up() {
-        Goods goods = goodsService.getOne(1L);
-        System.out.println(goods);
-        return goods.$up();
-    }
+        List<Goods> list = one.query().list();
+        System.err.println(list);
 
-    @GetMapping("/down")
-    public int down() {
-        Goods goods = goodsService.getOne(1L);
-        System.out.println(goods);
-        return goods.$down();
-    }
+        List<Category> categories = one.categoryList();
 
-    @GetMapping("/category")
-    public Category category() {
-        Category category = goodsService.getCategory(1L);
-        System.out.println(category);
-        return category;
+        System.err.println(categories);
+
+        categories.forEach(category -> {
+            System.err.println(category.goods());
+        });
     }
 }

@@ -1,20 +1,25 @@
 package com.oop.oop.entity;
 
-import com.oop.oop.mapper.CategoryMapper;
-import com.oop.oop.utils.ServiceFactory;
-import lombok.Data;
+import com.oop.oop.model.Category;
+import com.oop.oop.service.CategoryService;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author tommy dai
  * @date 2023/1/20
  */
-@Data
-public class CategoryEntity implements BaseEntity<CategoryMapper> {
+@Getter
+@Setter
+@ToString
+public class CategoryEntity extends BaseEntity<CategoryService, Category> {
     private Long id;
     private String name;
 
+
     @Override
-    public CategoryMapper $repo() {
-        return ServiceFactory.getBean(CategoryMapper.class);
+    public Class<CategoryService> serviceClass() {
+        return CategoryService.class;
     }
 }
