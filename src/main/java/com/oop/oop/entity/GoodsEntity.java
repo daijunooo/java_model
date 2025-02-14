@@ -26,7 +26,7 @@ public class GoodsEntity extends BaseEntity<GoodsService, Goods> {
 
 
     @Override
-    public Class<GoodsService> serviceClass() {
+    protected Class<GoodsService> serviceClass() {
         return GoodsService.class;
     }
 }

@@ -19,7 +19,7 @@ public class CategoryEntity extends BaseEntity<CategoryService, Category> {
 
 
     @Override
-    public Class<CategoryService> serviceClass() {
+    protected Class<CategoryService> serviceClass() {
         return CategoryService.class;
     }
 }
