@@ -30,16 +30,6 @@ public class Category extends CategoryEntity {
      * @return 是否修改成功
      */
     public boolean changeName(String name) {
-        this.setName(name);
-        return service().updateById(this);
-    }
-
-    /**
-     * 新增一个分类
-     *
-     * @return 是否新增成功
-     */
-    public boolean save() {
-        return service().save(this);
+        return this.setName(name).save();
     }
 }

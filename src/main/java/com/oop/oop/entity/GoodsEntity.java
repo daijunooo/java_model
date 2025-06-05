@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public class GoodsEntity extends BaseEntity<GoodsService, Goods> {
-    private Long id;
+
     private LocalDateTime createTime;
     private String goodsImages;
     private String goodsName;
