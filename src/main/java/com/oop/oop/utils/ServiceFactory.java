@@ -15,8 +15,8 @@ import java.util.concurrent.ConcurrentMap;
 @Component
 public class ServiceFactory implements ApplicationContextAware {
 
-    public static ApplicationContext context;
-    private static final ConcurrentMap<Class<?>, Object> beanCache = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<Class<?>, Object> beanCache = new ConcurrentHashMap(256);
+    private static ApplicationContext context;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -24,7 +24,11 @@ public class ServiceFactory implements ApplicationContextAware {
     }
 
     public static <T> T getBean(Class<T> clazz) {
-        return clazz.cast(beanCache.computeIfAbsent(clazz, context::getBean));
+        Object object = beanCache.get(clazz);
+        if (object == null) {
+            return clazz.cast(beanCache.computeIfAbsent(clazz, context::getBean));
+        }
+        return clazz.cast(object);
     }
 
 }
