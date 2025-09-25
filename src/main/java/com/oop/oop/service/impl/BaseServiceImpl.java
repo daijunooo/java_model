@@ -19,6 +19,10 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T extends BaseEntity> exte
         return this.lambdaQuery().apply("is_delete = {0}", 0);
     }
 
+    protected LambdaQueryChainWrapper<T> lambdaQueryOne() {
+        return select().last("limit 1");
+    }
+
     protected <T> List<T> safe(List<T> list) {
         return Optional.ofNullable(list).orElse(Collections.emptyList());
     }
