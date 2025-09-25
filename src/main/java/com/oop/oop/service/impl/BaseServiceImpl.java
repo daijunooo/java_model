@@ -16,7 +16,7 @@ import java.util.Optional;
 public class BaseServiceImpl<M extends BaseMapper<T>, T extends BaseEntity> extends ServiceImpl<M, T> {
 
     protected LambdaQueryChainWrapper<T> select() {
-        return this.lambdaQuery().eq(T::getIsDelete, 0);
+        return this.lambdaQuery().apply("is_delete = {0}", 0);
     }
 
     protected <T> List<T> safe(List<T> list) {

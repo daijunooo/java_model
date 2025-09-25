@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author tommy dai
  * @date 2023/1/20
@@ -19,11 +21,12 @@ public class ApiController {
 
     @GetMapping("/test")
     public void test() {
-        Goods goods = goodsService.getById(1);
+        List<Goods> goods = goodsService.getList();
 
-        // 通过模型关联访问分类信息，面向对象的开发
-        Category category = goods.category();
+        Category category = goods.get(0).category();
 
         System.err.println(category);
+
+        System.err.println(goods);
     }
 }
