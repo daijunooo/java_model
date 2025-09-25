@@ -2,7 +2,7 @@ package com.oop.oop.model;
 
 import com.oop.oop.entity.CategoryEntity;
 import com.oop.oop.entity.GoodsEntity;
-import com.oop.oop.service.CategoryService;
+import com.oop.oop.service.Service;
 
 /**
  * @author tommy dai
@@ -16,7 +16,7 @@ public class Goods extends GoodsEntity {
      * @return List<Category>
      */
     public Category category() {
-        return service(CategoryService.class).lambdaQuery()
+        return Service.category.lambdaQuery()
                 .eq(CategoryEntity::getId, this.getCategory())
                 .one();
     }

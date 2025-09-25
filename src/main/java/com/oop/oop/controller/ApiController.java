@@ -24,6 +24,7 @@ public class ApiController {
         List<Goods> goods = goodsService.getList();
 
         Category category = goods.get(0).category();
+        category = goods.get(0).category();
 
         System.err.println(category);
 

@@ -1,7 +1,6 @@
 package com.oop.oop.entity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.oop.oop.utils.ServiceFactory;
 import lombok.Getter;
 
 /**
@@ -9,12 +8,12 @@ import lombok.Getter;
  * @date 2023/1/20
  */
 @Getter
-public abstract class BaseEntity<T extends IService<E>, E extends BaseEntity<T, E>> {
+public abstract class BaseEntity<E extends BaseEntity<E>> {
 
     private Long id;
     private Integer isDelete;
 
-    protected abstract Class<T> serviceClass();
+    protected abstract <T extends IService> T service();
 
 
     public E setId(Long id) {
@@ -25,14 +24,6 @@ public abstract class BaseEntity<T extends IService<E>, E extends BaseEntity<T, 
     public E setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
         return self();
-    }
-
-    protected T service() {
-        return ServiceFactory.getBean(serviceClass());
-    }
-
-    protected <S> S service(Class<S> clazz) {
-        return ServiceFactory.getBean(clazz);
     }
 
     public boolean save() {

@@ -2,7 +2,7 @@ package com.oop.oop.model;
 
 import com.oop.oop.entity.CategoryEntity;
 import com.oop.oop.entity.GoodsEntity;
-import com.oop.oop.service.GoodsService;
+import com.oop.oop.service.Service;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class Category extends CategoryEntity {
      * @return Goods
      */
     public List<Goods> goods() {
-        return service(GoodsService.class).lambdaQuery()
+        return Service.goods.lambdaQuery()
                 .eq(GoodsEntity::getCategory, this.getId())
                 .list();
     }

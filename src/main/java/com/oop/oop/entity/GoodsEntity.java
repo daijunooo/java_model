@@ -2,9 +2,11 @@ package com.oop.oop.entity;
 
 import com.oop.oop.model.Goods;
 import com.oop.oop.service.GoodsService;
+import com.oop.oop.service.Service;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +17,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class GoodsEntity extends BaseEntity<GoodsService, Goods> {
+@Accessors(chain = true)
+public class GoodsEntity extends BaseEntity<Goods> {
 
     private LocalDateTime createTime;
     private String goodsImages;
@@ -26,7 +29,7 @@ public class GoodsEntity extends BaseEntity<GoodsService, Goods> {
 
 
     @Override
-    protected Class<GoodsService> serviceClass() {
-        return GoodsService.class;
+    protected GoodsService service() {
+        return Service.goods;
     }
 }

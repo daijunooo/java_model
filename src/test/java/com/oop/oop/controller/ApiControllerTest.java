@@ -1,5 +1,6 @@
 package com.oop.oop.controller;
 
+import com.oop.oop.model.Category;
 import com.oop.oop.model.Goods;
 import com.oop.oop.service.GoodsService;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,9 @@ class ApiControllerTest {
     @Test
     void test1() {
         List<Goods> list = goodsService.getList();
-        System.err.println(list);
+        list.forEach(goods -> {
+            Category category = goods.category();
+            System.err.println(category);
+        });
     }
 }

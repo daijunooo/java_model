@@ -2,6 +2,7 @@ package com.oop.oop.entity;
 
 import com.oop.oop.model.Category;
 import com.oop.oop.service.CategoryService;
+import com.oop.oop.service.Service;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,12 +12,12 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class CategoryEntity extends BaseEntity<CategoryService, Category> {
+public class CategoryEntity extends BaseEntity<Category> {
 
     private String name;
 
     @Override
-    protected Class<CategoryService> serviceClass() {
-        return CategoryService.class;
+    protected CategoryService service() {
+        return Service.category;
     }
 }
